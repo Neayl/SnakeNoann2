@@ -1,32 +1,7 @@
-window.onload = function (){
-    const grid = new Grid('lightgreen', 30, 30, 30);
-    document.addEventListener("keydown", grid.changeDirection);
-    grid.createFood();
-    function main() {
-        setTimeout(
-            function onTick() {
-                grid.clearCanvas();
-                grid.drawFood();
-                grid.advanceSnake();
-                grid.drawSnake();
-                grid.remainingtime -= 100;
-                document.getElementById('time').innerHTML =
-                    `Temp restant : ${Math.ceil(grid.remainingtime / 1000)} s`
-                if (grid.remainingtime <= 0) {
-                    grid.createFood();
+// Import stylesheets
+import './style.css';
 
-                }
-                if (grid.dead) {
-                    console.log ("toto")
-                    return;
-                }
-                main();
-            }, 100)
-    };
-
-    main();
-}
-
+// Write Javascript code!
 class Grid {
 
     color;
@@ -195,3 +170,31 @@ class Grid {
 
     }
 }
+
+const grid = new Grid('lightgreen', 30, 30, 30);
+document.addEventListener("keydown", grid.changeDirection);
+grid.createFood();
+
+function main() {
+  setTimeout(
+      function onTick() {
+          grid.clearCanvas();
+          grid.drawFood();
+          grid.advanceSnake();
+          grid.drawSnake();
+          grid.remainingtime -= 100;
+          document.getElementById('time').innerHTML =
+              `Temp restant : ${Math.ceil(grid.remainingtime / 1000)} s`
+          if (grid.remainingtime <= 0) {
+              grid.createFood();
+
+          }
+          if (grid.dead) {
+              console.log ("toto")
+              return;
+          }
+          main();
+      }, 100)
+};
+
+main();
